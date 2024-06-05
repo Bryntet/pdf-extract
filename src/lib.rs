@@ -1329,6 +1329,7 @@ pub enum AlternateColorSpace {
     DeviceGray,
     DeviceRGB,
     DeviceCMYK,
+    DeviceN,
     CalRGB(CalRGB),
     CalGray(CalGray),
     Lab(Lab),
@@ -1347,6 +1348,7 @@ pub enum ColorSpace {
     DeviceGray,
     DeviceRGB,
     DeviceCMYK,
+    DeviceN,
     Pattern,
     CalRGB(CalRGB),
     CalGray(CalGray),
@@ -1360,6 +1362,7 @@ fn make_colorspace<'a>(doc: &'a Document, name: &[u8], resources: &'a Dictionary
         b"DeviceGray" => ColorSpace::DeviceGray,
         b"DeviceRGB" => ColorSpace::DeviceRGB,
         b"DeviceCMYK" => ColorSpace::DeviceCMYK,
+        b"DeviceN" => ColorSpace::DeviceN,
         b"Pattern" => ColorSpace::Pattern,
         _ => {
             let colorspaces: &Dictionary = get(&doc, resources, b"ColorSpace");
@@ -1375,6 +1378,7 @@ fn make_colorspace<'a>(doc: &'a Document, name: &[u8], resources: &'a Dictionary
                                     b"DeviceGray" => AlternateColorSpace::DeviceGray,
                                     b"DeviceRGB" => AlternateColorSpace::DeviceRGB,
                                     b"DeviceCMYK" => AlternateColorSpace::DeviceCMYK,
+                                    b"DeviceN" => AlternateColorSpace::DeviceN,
                                     _ => panic!("unexpected color space name")
                                 }
                             }
@@ -1459,6 +1463,7 @@ fn make_colorspace<'a>(doc: &'a Document, name: &[u8], resources: &'a Dictionary
                     "DeviceGray" => ColorSpace::DeviceGray,
                     "DeviceRGB" => ColorSpace::DeviceRGB,
                     "DeviceCMYK" => ColorSpace::DeviceCMYK,
+                    "DeviceN" => ColorSpace::DeviceN,
                     _ => {
                         panic!("color_space {:?} {:?} {:?}", name, cs_name, cs)
                     }
